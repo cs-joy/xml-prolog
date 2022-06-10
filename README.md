@@ -90,8 +90,57 @@ The document contains only properly encoded legal Unicode characters.
 None of the special syntax characters such as < and & appear except when performing their markup-delineation roles.
 The start-tag, end-tag, and empty-element tag that delimit elements are correctly nested, with none missing and none overlapping.
 Tag names are case-sensitive; the start-tag and end-tag must match exactly.
-Tag names cannot contain any of the characters !"#$%&'()*+,/;<=>?@[\]^`{|}~, nor a space character, and cannot begin with "-", ".", or a numeric digit.
+Tag names cannot contain any of the characters `!"#$%&'()*+,/;<=>?@[\]^`{|}~`, nor a space character, and cannot begin with "-", "."`, or a numeric digit.
 A single root element contains all the other elements.
-The definition of an XML document excludes texts that contain violations of well-formedness rules; they are simply not XML. An XML processor that encounters such a violation is required to report such errors and to cease normal processing. This policy, occasionally referred to as "draconian error handling," stands in notable contrast to the behavior of programs that process HTML, which are designed to produce a reasonable result even in the presence of severe markup errors.[17] XML's policy in this area has been criticized as a violation of Postel's law ("Be conservative in what you send; be liberal in what you accept").[18]
+The definition of an XML document excludes texts that contain violations of well-formedness rules; they are simply not XML. An XML processor that encounters such a violation is required to report such errors and to cease normal processing. This policy, occasionally referred to as "draconian error handling," stands in notable contrast to the behavior of programs that process HTML, which are designed to produce a reasonable result even in the presence of severe markup errors. XML's policy in this area has been criticized as a violation of Postel's law ("Be conservative in what you send; be liberal in what you accept").
 
-The XML specification defines a valid XML document as a well-formed XML document which also conforms to the rules of a Document Type Definition (DTD).[19][20]
+The XML specification defines a valid XML document as a well-formed XML document which also conforms to the rules of a Document Type Definition (DTD).
+
+## Schemas and validation
+In addition to being well-formed, an XML document may be valid. This means that it contains a reference to a Document Type Definition (DTD), and that its elements and attributes are declared in that DTD and follow the grammatical rules for them that the DTD specifies.
+
+XML processors are classified as validating or non-validating depending on whether or not they check XML documents for validity. A processor that discovers a validity error must be able to report it, but may continue normal processing.
+
+A DTD is an example of a schema or grammar. Since the initial publication of XML 1.0, there has been substantial work in the area of schema languages for XML. Such schema languages typically constrain the set of elements that may be used in a document, which attributes may be applied to them, the order in which they may appear, and the allowable parent/child relationships.
+
+### Document type definition
+Main article: Document type definition
+The oldest schema language for XML is the document type definition (DTD), inherited from SGML.
+
+DTDs have the following benefits:
+
+- DTD support is ubiquitous due to its inclusion in the XML 1.0 standard.
+- DTDs are terse compared to element-based schema languages and consequently present more information in a single screen.
+- DTDs allow the declaration of standard public entity sets for publishing characters.
+- DTDs define a document type rather than the types used by a namespace, thus grouping all constraints for a document in a single collection.
+
+DTDs have the following limitations:
+
+- They have no explicit support for newer features of XML, most importantly namespaces.
+- They lack expressiveness. XML DTDs are simpler than SGML DTDs and there are certain structures that cannot be expressed with regular grammars. DTDs only support rudimentary datatypes.
+- They lack readability. DTD designers typically make heavy use of parameter entities (which behave essentially as textual macros), which make it easier to define complex grammars, but at the expense of clarity.
+- They use a syntax based on regular expression syntax, inherited from SGML, to describe the schema. Typical XML APIs such as SAX do not attempt to offer applications a structured representation of the syntax, so it is less accessible to programmers than an element-based syntax may be.
+
+Two peculiar features that distinguish DTDs from other schema types are the syntactic support for embedding a DTD within XML documents and for defining entities, which are arbitrary fragments of text or markup that the XML processor inserts in the DTD itself and in the XML document wherever they are referenced, like character escapes.
+
+DTD technology is still used in many applications because of its ubiquity.
+
+### Schema
+Main article: [XML Schema (W3C)](https://en.wikipedia.org/wiki/XML_Schema_(W3C))
+A newer schema language, described by the W3C as the successor of DTDs, is XML Schema, often referred to by the initialism for XML Schema instances, XSD (XML Schema Definition). XSDs are far more powerful than DTDs in describing XML languages. They use a rich datatyping system and allow for more detailed constraints on an XML document's logical structure. XSDs also use an XML-based format, which makes it possible to use ordinary XML tools to help process them.
+
+xs:schema element that defines a schema:
+```xml
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"></xs:schema>
+```
+### RELAX NG
+RELAX NG (Regular Language for XML Next Generation) was initially specified by OASIS and is now a standard (Part 2: Regular-grammar-based validation of ISO/IEC 19757 – DSDL). RELAX NG schemas may be written in either an XML based syntax or a more compact non-XML syntax; the two syntaxes are isomorphic and James Clark's conversion tool—Trang—can convert between them without loss of information. RELAX NG has a simpler definition and validation framework than XML Schema, making it easier to use and implement. It also has the ability to use datatype framework plug-ins; a RELAX NG schema author, for example, can require values in an XML document to conform to definitions in XML Schema Datatypes.
+
+### Schematron
+Schematron is a language for making assertions about the presence or absence of patterns in an XML document. It typically uses XPath expressions. Schematron is now a standard (Part 3: Rule-based validation of ISO/IEC 19757 – DSDL).
+
+### DSDL and other schema languages
+DSDL (Document Schema Definition Languages) is a multi-part ISO/IEC standard (ISO/IEC 19757) that brings together a comprehensive set of small schema languages, each targeted at specific problems. DSDL includes RELAX NG full and compact syntax, Schematron assertion language, and languages for defining datatypes, character repertoire constraints, renaming and entity expansion, and namespace-based routing of document fragments to different validators. DSDL schema languages do not have the vendor support of XML Schemas yet, and are to some extent a grassroots reaction of industrial publishers to the lack of utility of XML Schemas for publishing.
+
+Some schema languages not only describe the structure of a particular XML format but also offer limited facilities to influence processing of individual XML files that conform to this format. DTDs and XSDs both have this ability; they can for instance provide the infoset augmentation facility and attribute defaults. RELAX NG and Schematron intentionally do not provide these.
