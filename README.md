@@ -119,7 +119,8 @@ XML processors are classified as validating or non-validating depending on wheth
 A DTD is an example of a schema or grammar. Since the initial publication of XML 1.0, there has been substantial work in the area of schema languages for XML. Such schema languages typically constrain the set of elements that may be used in a document, which attributes may be applied to them, the order in which they may appear, and the allowable parent/child relationships.
 
 ### Document type definition
-Main article: Document type definition
+Main article: [Document type definition](https://en.wikipedia.org/wiki/Document_type_definition)
+
 The oldest schema language for XML is the document type definition (DTD), inherited from SGML.
 
 DTDs have the following benefits:
