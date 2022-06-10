@@ -42,6 +42,7 @@ XML includes facilities for identifying the encoding of the Unicode characters t
 
 ### Valid characters
 Main article: [Valid characters in XML](https://en.wikipedia.org/wiki/Valid_characters_in_XML)
+
 Unicode code points in the following ranges are valid in XML 1.0 documents:[10]
 
 - U+0009 (Horizontal Tab), U+000A (Line Feed), U+000D (Carriage Return): these are the only C0 controls accepted in XML 1.0;
