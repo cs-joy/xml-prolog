@@ -81,3 +81,17 @@ XML 1.0 (Fifth Edition) and XML 1.1 support the direct use of almost any Unicode
 <?xml version="1.0" encoding="UTF-8"?>
 <俄语 լեզու="ռուսերեն">данные</俄语>
 ```
+
+## Syntactical correctness and error-handling
+Main article: Well-formed document
+The XML specification defines an XML document as a well-formed text, meaning that it satisfies a list of syntax rules provided in the specification. Some key points in the fairly lengthy list include:
+
+The document contains only properly encoded legal Unicode characters.
+None of the special syntax characters such as < and & appear except when performing their markup-delineation roles.
+The start-tag, end-tag, and empty-element tag that delimit elements are correctly nested, with none missing and none overlapping.
+Tag names are case-sensitive; the start-tag and end-tag must match exactly.
+Tag names cannot contain any of the characters !"#$%&'()*+,/;<=>?@[\]^`{|}~, nor a space character, and cannot begin with "-", ".", or a numeric digit.
+A single root element contains all the other elements.
+The definition of an XML document excludes texts that contain violations of well-formedness rules; they are simply not XML. An XML processor that encounters such a violation is required to report such errors and to cease normal processing. This policy, occasionally referred to as "draconian error handling," stands in notable contrast to the behavior of programs that process HTML, which are designed to produce a reasonable result even in the presence of severe markup errors.[17] XML's policy in this area has been criticized as a violation of Postel's law ("Be conservative in what you send; be liberal in what you accept").[18]
+
+The XML specification defines a valid XML document as a well-formed XML document which also conforms to the rules of a Document Type Definition (DTD).[19][20]
