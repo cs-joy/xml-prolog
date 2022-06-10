@@ -259,3 +259,4 @@ JSON, YAML, and S-Expressions are frequently proposed as simpler alternatives (s
 
 
 For more to, you can follow [Wikipedia](https://en.wikipedia.org/wiki/XML)
+|| [MDN](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction "XML introduction")
