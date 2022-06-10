@@ -144,3 +144,54 @@ Schematron is a language for making assertions about the presence or absence of 
 DSDL (Document Schema Definition Languages) is a multi-part ISO/IEC standard (ISO/IEC 19757) that brings together a comprehensive set of small schema languages, each targeted at specific problems. DSDL includes RELAX NG full and compact syntax, Schematron assertion language, and languages for defining datatypes, character repertoire constraints, renaming and entity expansion, and namespace-based routing of document fragments to different validators. DSDL schema languages do not have the vendor support of XML Schemas yet, and are to some extent a grassroots reaction of industrial publishers to the lack of utility of XML Schemas for publishing.
 
 Some schema languages not only describe the structure of a particular XML format but also offer limited facilities to influence processing of individual XML files that conform to this format. DTDs and XSDs both have this ability; they can for instance provide the infoset augmentation facility and attribute defaults. RELAX NG and Schematron intentionally do not provide these.
+
+## Related specifications
+A cluster of specifications closely related to XML have been developed, starting soon after the initial publication of XML 1.0. It is frequently the case that the term "XML" is used to refer to XML together with one or more of these other technologies that have come to be seen as part of the XML core.
+
+- XML namespaces enable the same document to contain XML elements and attributes taken from different vocabularies, without any naming collisions occurring. Although - - XML Namespaces are not part of the XML specification itself, virtually all XML software also supports XML Namespaces.
+- XML Base defines the xml:base attribute, which may be used to set the base for resolution of relative URI references within the scope of a single XML element.
+- XML Information Set or XML Infoset is an abstract data model for XML documents in terms of information items. The infoset is commonly used in the specifications of - - XML languages, for convenience in describing constraints on the XML constructs those languages allow.
+- XSL (Extensible Stylesheet Language) is a family of languages used to transform and render XML documents, split into three parts:
+- XSLT (XSL Transformations), an XML language for transforming XML documents into other XML documents or other formats such as HTML, plain text, or XSL-FO. XSLT is very tightly coupled with XPath, which it uses to address components of the input XML document, mainly elements and attributes.
+- XSL-FO (XSL Formatting Objects), an XML language for rendering XML documents, often used to generate PDFs.
+- XPath (XML Path Language), a non-XML language for addressing the components (elements, attributes, and so on) of an XML document. XPath is widely used in other core-- XML specifications and in programming libraries for accessing XML-encoded data.
+- XQuery (XML Query) is an XML query language strongly rooted in XPath and XML Schema. It provides methods to access, manipulate and return XML, and is mainly conceived as a query language for XML databases.
+- XML Signature defines syntax and processing rules for creating digital signatures on XML content.
+- XML Encryption defines syntax and processing rules for encrypting XML content.
+- XML model (Part 11: Schema Association of ISO/IEC 19757 – DSDL) defines a means of associating any xml document with any of the schema types mentioned above.
+
+Some other specifications conceived as part of the "XML Core" have failed to find wide adoption, including XInclude, XLink, and XPointer.
+
+## Programming interfaces
+The design goals of XML include, "It shall be easy to write programs which process XML documents." Despite this, the XML specification contains almost no information about how programmers might go about doing such processing. The XML Infoset specification provides a vocabulary to refer to the constructs within an XML document, but does not provide any guidance on how to access this information. A variety of APIs for accessing XML have been developed and used, and some have been standardized.
+
+Existing APIs for XML processing tend to fall into these categories:
+
+- Stream-oriented APIs accessible from a programming language, for example SAX and StAX.
+- Tree-traversal APIs accessible from a programming language, for example DOM.
+- XML data binding, which provides an automated translation between an XML document and programming-language objects.
+- Declarative transformation languages such as XSLT and XQuery.
+- Syntax extensions to general-purpose programming languages, for example LINQ and Scala.
+
+Stream-oriented facilities require less memory and, for certain tasks based on a linear traversal of an XML document, are faster and simpler than other alternatives. Tree-traversal and data-binding APIs typically require the use of much more memory, but are often found more convenient for use by programmers; some include declarative retrieval of document components via the use of XPath expressions.
+
+XSLT is designed for declarative description of XML document transformations, and has been widely implemented both in server-side packages and Web browsers. XQuery overlaps XSLT in its functionality, but is designed more for searching of large XML databases.
+
+### Simple API for XML
+Main article: Simple API for XML
+Simple API for XML (SAX) is a lexical, event-driven API in which a document is read serially and its contents are reported as callbacks to various methods on a handler object of the user's design. SAX is fast and efficient to implement, but difficult to use for extracting information at random from the XML, since it tends to burden the application author with keeping track of what part of the document is being processed. It is better suited to situations in which certain types of information are always handled the same way, no matter where they occur in the document.
+
+### Pull parsing
+Pull parsing treats the document as a series of items read in sequence using the iterator design pattern. This allows for writing of recursive descent parsers in which the structure of the code performing the parsing mirrors the structure of the XML being parsed, and intermediate parsed results can be used and accessed as local variables within the functions performing the parsing, or passed down (as function parameters) into lower-level functions, or returned (as function return values) to higher-level functions.[21] Examples of pull parsers include Data::Edit::Xml in Perl, StAX in the Java programming language, XMLPullParser in Smalltalk, XMLReader in PHP, ElementTree.iterparse in Python, System.Xml.XmlReader in the .NET Framework, and the DOM traversal API (NodeIterator and TreeWalker).
+
+A pull parser creates an iterator that sequentially visits the various elements, attributes, and data in an XML document. Code that uses this iterator can test the current item (to tell, for example, whether it is a start-tag or end-tag, or text), and inspect its attributes (local name, namespace, values of XML attributes, value of text, etc.), and can also move the iterator to the next item. The code can thus extract information from the document as it traverses it. The recursive-descent approach tends to lend itself to keeping data as typed local variables in the code doing the parsing, while SAX, for instance, typically requires a parser to manually maintain intermediate data within a stack of elements that are parent elements of the element being parsed. Pull-parsing code can be more straightforward to understand and maintain than SAX parsing code.
+
+### Document Object Model
+Main article: Document Object Model
+Document Object Model (DOM) is an API that allows for navigation of the entire document as if it were a tree of node objects representing the document's contents. A DOM document can be created by a parser, or can be generated manually by users (with limitations). Data types in DOM nodes are abstract; implementations provide their own programming language-specific bindings. DOM implementations tend to be memory intensive, as they generally require the entire document to be loaded into memory and constructed as a tree of objects before access is allowed.
+
+### Data binding
+XML data binding is the binding of XML documents to a hierarchy of custom and strongly typed objects, in contrast to the generic objects created by a DOM parser. This approach simplifies code development, and in many cases allows problems to be identified at compile time rather than run-time. It is suitable for applications where the document structure is known and fixed at the time the application is written. Example data binding systems include the Java Architecture for XML Binding (JAXB), XML Serialization in .NET Framework.[22] and XML serialization in gSOAP.
+
+### XML as data type
+XML has appeared as a first-class data type in other languages. The ECMAScript for XML (E4X) extension to the ECMAScript/JavaScript language explicitly defines two specific objects (XML and XMLList) for JavaScript, which support XML document nodes and XML node lists as distinct objects and use a dot-notation specifying parent-child relationships.[23] E4X is supported by the Mozilla 2.5+ browsers (though now deprecated) and Adobe Actionscript, but has not been adopted more universally. Similar notations are used in Microsoft's LINQ implementation for Microsoft .NET 3.5 and above, and in Scala (which uses the Java VM). The open-source xmlsh application, which provides a Linux-like shell with special features for XML manipulation, similarly treats XML as a data type, using the <[ ]> notation.[24] The Resource Description Framework defines a data type rdf:XMLLiteral to hold wrapped, canonical XML.[25] Facebook has produced extensions to the PHP and JavaScript languages that add XML to the core syntax in a similar fashion to E4X, namely XHP and JSX respectively.
