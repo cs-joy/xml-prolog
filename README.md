@@ -256,3 +256,6 @@ Mapping the basic tree model of XML to type systems of programming languages or 
 Other criticisms attempt to refute the claim that XML is a self-describing language[41] (though the XML specification itself makes no such claim).
 
 JSON, YAML, and S-Expressions are frequently proposed as simpler alternatives (see Comparison of data serialization formats) that focus on representing highly structured data rather than documents, which may contain both highly structured and relatively unstructured content. However, W3C standardized XML schema specifications offer a broader range of structured XSD data types compared to simpler serialization formats and offer modularity and reuse through XML namespaces.
+
+
+For more to, you can follow [Wikipedia](https://en.wikipedia.org/wiki/XML)
