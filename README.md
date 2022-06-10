@@ -14,22 +14,23 @@ Many industry data standards, such as Health Level 7, OpenTravel Alliance, FpML,
 ## Key terminology
 The material in this section is based on the XML Specification. This is not an exhaustive list of all the constructs that appear in XML; it provides an introduction to the key constructs most often encountered in day-to-day use.
 
-Character
+### Character
 An XML document is a string of characters. Almost every legal Unicode character may appear in an XML document.
 Processor and application
 The processor analyzes the markup and passes structured information to an application. The specification places requirements on what an XML processor must do and not do, but the application is outside its scope. The processor (as the specification calls it) is often referred to colloquially as an XML parser.
 Markup and content
 The characters making up an XML document are divided into markup and content, which may be distinguished by the application of simple syntactic rules. Generally, strings that constitute markup either begin with the character < and end with a >, or they begin with the character & and end with a ;. Strings of characters that are not markup are content. However, in a CDATA section, the delimiters <![CDATA[ and ]]> are classified as markup, while the text between them is classified as content. In addition, whitespace before and after the outermost element is classified as markup.
-Tag
-A tag is a markup construct that begins with < and ends with >. There are three types of tag:
-start-tag, such as <section>;
-end-tag, such as </section>;
-empty-element tag, such as <line-break />.
-Element
+### Tag
+A tag is a markup construct that begins with `<` and ends with `>`. There are three types of tag:
+- start-tag, such as <section>;
+- end-tag, such as </section>;
+- empty-element tag, such as <line-break />.
+
+### Element
 An element is a logical document component that either begins with a start-tag and ends with a matching end-tag or consists only of an empty-element tag. The characters between the start-tag and end-tag, if any, are the element's content, and may contain markup, including other elements, which are called child elements. An example is <greeting>Hello, world!</greeting>. Another is <line-break />.
-Attribute
+### Attribute
 An attribute is a markup construct consisting of a name–value pair that exists within a start-tag or empty-element tag. An example is <img src="" alt="Madonna" />, where the names of the attributes are "src" and "alt", and their values are "madonna.jpg" and "Madonna" respectively. Another example is <step number="3">Connect A to B.</step>, where the name of the attribute is "number" and its value is "3". An XML attribute can only have a single value and each attribute can appear at most once on each element. In the common situation where a list of multiple values is desired, this must be done by encoding the list into a well-formed XML attribute[i] with some format beyond what XML defines itself. Usually this is either a comma or semi-colon delimited list or, if the individual values are known not to contain spaces,[ii] a space-delimited list can be used. <div class="inner greeting-box">Welcome!</div>, where the attribute "class" has both the value "inner greeting-box" and also indicates the two CSS class names "inner" and "greeting-box".
-XML declaration
+### XML declaration
 XML documents may begin with an XML declaration that describes some information about themselves. An example is <?xml version="1.0" encoding="UTF-8"?>.
 
 ## Characters and escaping
@@ -127,6 +128,7 @@ DTD technology is still used in many applications because of its ubiquity.
 
 ### Schema
 Main article: [XML Schema (W3C)](https://en.wikipedia.org/wiki/XML_Schema_(W3C))
+
 A newer schema language, described by the W3C as the successor of DTDs, is XML Schema, often referred to by the initialism for XML Schema instances, XSD (XML Schema Definition). XSDs are far more powerful than DTDs in describing XML languages. They use a rich datatyping system and allow for more detailed constraints on an XML document's logical structure. XSDs also use an XML-based format, which makes it possible to use ordinary XML tools to help process them.
 
 xs:schema element that defines a schema:
