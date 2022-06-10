@@ -40,41 +40,50 @@ XML documents consist entirely of characters from the Unicode repertoire. Except
 
 XML includes facilities for identifying the encoding of the Unicode characters that make up the document, and for expressing characters that, for one reason or another, cannot be used directly.
 
-Valid characters
-Main article: Valid characters in XML
+### Valid characters
+Main article: [Valid characters in XML](https://en.wikipedia.org/wiki/Valid_characters_in_XML)
 Unicode code points in the following ranges are valid in XML 1.0 documents:[10]
 
-U+0009 (Horizontal Tab), U+000A (Line Feed), U+000D (Carriage Return): these are the only C0 controls accepted in XML 1.0;
-U+0020–U+D7FF, U+E000–U+FFFD: this excludes some non-characters in the BMP (all surrogates, U+FFFE and U+FFFF are forbidden);
-U+10000–U+10FFFF: this includes all code points in supplementary planes, including non-characters.
+- U+0009 (Horizontal Tab), U+000A (Line Feed), U+000D (Carriage Return): these are the only C0 controls accepted in XML 1.0;
+
+- U+0020–U+D7FF, U+E000–U+FFFD: this excludes some non-characters in the BMP (all surrogates, U+FFFE and U+FFFF are forbidden);
+
+- U+10000–U+10FFFF: this includes all code points in supplementary planes, including non-characters.
+
 XML 1.1 extends the set of allowed characters to include all the above, plus the remaining characters in the range U+0001–U+001F.[11] At the same time, however, it restricts the use of C0 and C1 control characters other than U+0009 (Horizontal Tab), U+000A (Line Feed), U+000D (Carriage Return), and U+0085 (Next Line) by requiring them to be written in escaped form (for example U+0001 must be written as &#x01; or its equivalent). In the case of C1 characters, this restriction is a backwards incompatibility; it was introduced to allow common encoding errors to be detected.
 
 The code point U+0000 (Null) is the only character that is not permitted in any XML 1.0 or 1.1 document.
 
-Encoding detection
+### Encoding detection
 The Unicode character set can be encoded into bytes for storage or transmission in a variety of different ways, called "encodings". Unicode itself defines encodings that cover the entire repertoire; well-known ones include UTF-8 and UTF-16.[12] There are many other text encodings that predate Unicode, such as ASCII and ISO/IEC 8859; their character repertoires in almost every case are subsets of the Unicode character set.
 
 XML allows the use of any of the Unicode-defined encodings and any other encodings whose characters also appear in Unicode. XML also provides a mechanism whereby an XML processor can reliably, without any prior knowledge, determine which encoding is being used.[13] Encodings other than UTF-8 and UTF-16 are not necessarily recognized by every XML parser.
 
-Escaping
+### Escaping
 XML provides escape facilities for including characters that are problematic to include directly. For example:
 
-The characters "<" and "&" are key syntax markers and may never appear in content outside a CDATA section. It is allowed, but not recommended, to use "<" in XML entity values.[14]
-Some character encodings support only a subset of Unicode. For example, it is legal to encode an XML document in ASCII, but ASCII lacks code points for Unicode characters such as "é".
-It might not be possible to type the character on the author's machine.
-Some characters have glyphs that cannot be visually distinguished from other characters, such as the non-breaking space (&#xa0;) " " and the space (&#x20;) " ", and the Cyrillic capital letter A (&#x410;) "А" and the Latin capital letter A (&#x41;) "A".
+- The characters "<" and "&" are key syntax markers and may never appear in content outside a CDATA section. It is allowed, but not recommended, to use "<" in XML entity values.
+- Some character encodings support only a subset of Unicode. For example, it is legal to encode an XML document in ASCII, but ASCII lacks code points for Unicode characters such as "é".
+- It might not be possible to type the character on the author's machine.
+- Some characters have glyphs that cannot be visually distinguished from other characters, such as the non-breaking space (&#xa0;) " " and the space (&#x20;) " ", and the Cyrillic capital letter A (&#x410;) "А" and the Latin capital letter A (&#x41;) "A".
+
 There are five predefined entities:
 
-&lt; represents "<";
-&gt; represents ">";
-&amp; represents "&";
-&apos; represents "'";
-&quot; represents '"'.
+- &lt; represents "<";
+
+- &gt; represents ">";
+
+- &amp; represents "&";
+
+- &apos; represents "'";
+
+- &quot; represents '"'.
+
 All permitted Unicode characters may be represented with a numeric character reference. Consider the Chinese character "中", whose numeric code in Unicode is hexadecimal 4E2D, or decimal 20,013. A user whose keyboard offers no method for entering this character could still insert it in an XML document encoded either as &#20013; or &#x4e2d;. Similarly, the string "I <3 Jörg" could be encoded for inclusion in an XML document as I &lt;3 J&#xF6;rg.
 
-&#0; is not permitted because the null character is one of the control characters excluded from XML, even when using a numeric character reference.[15] An alternative encoding mechanism such as Base64 is needed to represent such characters.
+`&#0;` is not permitted because the null character is one of the control characters excluded from XML, even when using a numeric character reference.[15] An alternative encoding mechanism such as Base64 is needed to represent such characters.
 
-Comments
+### Comments
 Comments may appear anywhere in a document outside other markup. Comments cannot appear before the XML declaration. Comments begin with <!-- and end with -->. For compatibility with SGML, the string "--" (double-hyphen) is not allowed inside comments;[16] this means comments cannot be nested. The ampersand has no special significance within comments, so entity and character references are not recognized as such, and there is no way to represent characters outside the character set of the document encoding.
 
 An example of a valid comment: <!--no need to escape <code> & such in comments-->
